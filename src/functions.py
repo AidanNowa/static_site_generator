@@ -216,4 +216,19 @@ def text_to_textnodes(text):
     nodes = split_nodes_link(nodes)
     return nodes
 
+def markdown_to_blocks(markdown):
+    block_list = []
+    blocks = markdown.split('\n\n')
+    for block in blocks:
+        #print(f"block is: {block}")
+        if block != '':
+            block_list.append(block.strip())
+    return block_list    
+
+
+
+
+
+
+
 

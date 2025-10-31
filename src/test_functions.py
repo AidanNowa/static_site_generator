@@ -3,6 +3,7 @@ import unittest
 from textnode import TextType, TextNode
 from htmlnode import HTMLNode, LeafNode, ParentNode
 from functions import *
+from blocktype import *
 
 class TestFunctions(unittest.TestCase):
     #def test_blankeq(self):
@@ -133,8 +134,102 @@ class TestFunctions(unittest.TestCase):
             TextNode("link", TextType.LINK, "https://boot.dev"),
         ])
 
+    def test_markdown_to_blocks(self):
+        md = """
+This is **bolded** paragraph
 
+This is another paragraph with _italic_ text and `code` here
+This is the same paragraph on a new line
 
+- This is a list
+- with items
+"""
+        blocks = markdown_to_blocks(md)
+        self.assertEqual(
+            blocks,
+            [
+                "This is **bolded** paragraph",
+                "This is another paragraph with _italic_ text and `code` here\nThis is the same paragraph on a new line",
+                "- This is a list\n- with items",
+            ],
+        )
+
+    def test_block_to_paragraph_type(self):
+        block = """test1
+test2
+test3
+final"""
+        ptype = block_to_block_type(block.strip())
+        self.assertEqual(ptype, BlockType.PARAGRAPH)
+
+    def test_block_to_bad_paragraph_type(self):
+        block = """test1
+>test2
+- test3
+1. final"""
+        ptype = block_to_block_type(block.strip())
+        self.assertEqual(ptype, BlockType.PARAGRAPH)
+
+    def test_block_to_heading1_type(self):
+        block ="# heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading2_type(self):
+        block ="## heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading3_type(self):
+        block ="### heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading4_type(self):
+        block ="#### heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading5_type(self):
+        block ="##### heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading6_type(self):
+        block ="###### heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.HEADING)
+
+    def test_block_to_heading7_type(self):
+        block ="####### heading"
+        htype = block_to_block_type(block)
+        self.assertEqual(htype, BlockType.PARAGRAPH)
+
+    def test_block_to_code_type(self):
+        block ="```code here```"
+        ctype = block_to_block_type(block)
+        self.assertEqual(ctype, BlockType.CODE) 
+
+    def test_block_to_quote_type(self):
+        block=""">quote1
+>quote2
+>quote3"""
+        qtype = block_to_block_type(block)
+        self.assertEqual(qtype, BlockType.QUOTE)
+
+    def test_block_to_ul_type(self):
+        block="""- item1
+- item2
+- item3"""
+        ultype = block_to_block_type(block)
+        self.assertEqual(ultype, BlockType.UNORDERED_LIST)
+
+    def test_block_to_ol_type(self):
+        block="""1. item1
+2. item2
+3. item3"""
+        oltype = block_to_block_type(block)
+        self.assertEqual(oltype, BlockType.ORDERED_LIST)
 
 
 
