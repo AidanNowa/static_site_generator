@@ -1,4 +1,5 @@
 from enum import Enum
+
 import re
 class BlockType(Enum):
     PARAGRAPH = "paragraph"
@@ -33,4 +34,7 @@ def block_to_block_type(block):
     if ordered_list_counter == len(splits):
         return BlockType.ORDERED_LIST 
     
-    return BlockType.PARAGRAPH    
+    return BlockType.PARAGRAPH
+
+
+   
