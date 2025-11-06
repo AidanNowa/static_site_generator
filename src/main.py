@@ -48,8 +48,8 @@ def generate_page(from_path, template_path, dest_path, basepath):
     template = (
         template.replace("{{ Title }}", title)
         .replace("{{ Content }}", html.to_html())
-        .replace('href="/', f'href="{basepath}/')
-        .replace('src="/', f'src="{basepath}/')
+        .replace('href="/', f'href="{basepath}')
+        .replace('src="/', f'src="{basepath}')
     )
 
     if not dest_path.parent.exists():
