@@ -37,7 +37,7 @@ def extract_title(htmlnode):
         raise Exception("Improper markdown")
     return first_element.children[0].value    
 
-def generate_page(from_path, template_path, dest_path):
+def generate_page(from_path, template_path, dest_path, basepath):
     print(f"Generating page from {from_path} to {dest_path} using {template_path}")
     markdown = from_path.read_text()
     template = template_path.read_text()
@@ -48,6 +48,8 @@ def generate_page(from_path, template_path, dest_path):
     template = (
         template.replace("{{ Title }}", title)
         .replace("{{ Content }}", html.to_html())
+        .replace('href="/', f'href="{basepath}')
+        .replace('src="/', f'src="{basepath}')
     )
 
     if not dest_path.parent.exists():
@@ -55,22 +57,27 @@ def generate_page(from_path, template_path, dest_path):
     #print(f"dest_path is: {dest_path}")
     dest_path.write_text(template)
 
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path):
+def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
     if not dest_dir_path.exists():
         dest_dir_path.mkdir()
     for file in dir_path_content.iterdir():
         new_file = dest_dir_path / file.name
         if file.is_dir():
-            generate_pages_recursive(file, template_path, new_file)
+            generate_pages_recursive(file, template_path, new_file, basepath)
         else:
             if file.suffix.lower() == ".md":
-                generate_page(file, template_path, new_file.with_suffix(".html"))
+                generate_page(file, template_path, new_file.with_suffix(".html"), basepath)
             else:
                 print(f"Ignoring file: {f}")
 
 def main():
+    if len(sys.argv) == 2:
+        basepath = sys.argv[1]
+    else:
+        basepath = "/"
+
     project_root = Path(__file__).parent.parent
-    destination_path = project_root / "public"
+    destination_path = project_root / "docs"
     source_path = project_root / "static"
     
     #remove dir before copying
@@ -83,7 +90,7 @@ def main():
     from_path = project_root / "content"
     template_path = project_root / "template.html"
 
-    generate_pages_recursive(from_path, template_path, destination_path)
+    generate_pages_recursive(from_path, template_path, destination_path, basepath)
     
 
 
