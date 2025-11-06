@@ -13,9 +13,14 @@ def text_node_to_html_node(text_node):
     if text_node.text_type == TextType.CODE:
         return LeafNode("code", text_node.text)
     if text_node.text_type == TextType.LINK:
-        return LeafNode("a", text_node.text, props=["href"])
+        if text_node.url is None:
+            text_node.url = ""
+        return LeafNode("a", text_node.text, props={"href": text_node.url})
+        #return LeafNode("a", text_node.text, props={"href": text_node.url})
     if text_node.text_type == TextType.IMAGE:
-        return LeafNode("img", "", props=["src", "alt"])
+        if text_node.url is None:
+            text_node.url = ""
+        return LeafNode("img", "", props={"src": text_node.url, "alt": text_node.text})
     raise Exception("Invalid TextType")
      
 def extract_markdown_images(text):
@@ -169,9 +174,9 @@ def block_to_html_node(block, block_type):
         return code_to_html_node(block)
     if block_type == BlockType.QUOTE:
         return quote_to_html_node(block)
-    if block_type == BlockType.UNORDERED:
+    if block_type == BlockType.UNORDERED_LIST:
         return ulist_to_html_node(block)
-    if block_type == BlockType.ORDERED:
+    if block_type == BlockType.ORDERED_LIST:
         return olist_to_html_node(block)
     raise Exception("Invalid block type")
  

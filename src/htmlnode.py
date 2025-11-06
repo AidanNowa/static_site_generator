@@ -10,7 +10,7 @@ class HTMLNode:
 
     def props_to_html(self):
         if self.props == None:
-            return None
+            return "" 
         #kv_pairs = []
         #for key in self.props.keys():
         #    kv_pairs.append(f"{key}={props[key]}")
@@ -31,7 +31,9 @@ class LeafNode(HTMLNode):
             raise ValueError("All Leaf Nodes must have a value.")
         if self.tag == None:
             return f"{self.value}"
-        return f"<{self.tag}>{self.value}</{self.tag}>"
+        props_str = self.props_to_html()
+    
+        return f"<{self.tag}{props_str}>{self.value}</{self.tag}>"
 
 class ParentNode(HTMLNode):
     def __init__(self, tag, children, props=None):
