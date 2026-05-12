@@ -1,96 +1,35 @@
-#Thank you to geophpherie on github, needed to look at their solution to get this done
 import os
-import sys
 import shutil
-from pathlib import Path
-from textnode import *
-from functions import *
+import sys
 
-print('hello world')
+from copystatic import copy_files_recursive
+from gencontent import generate_pages_recursive
 
-def delete_files_in_dir(directory_path):
-    for filename in os.listdir(directory_path):
-        filepath = os.path.join(directory_path, filename)
-        if os.path.isfile(filepath):
-            os.remove(filepath)
-            print(f"Deleted file: {filepath}")
 
-def copy_dir_recursive(source_path, destination_path):
-    if not destination_path.exists():
-        destination_path.mkdir()
-    for file in source_path.iterdir():
-        new_file = destination_path / file.name
-        if file.is_dir():
-            copy_dir_recursive(file, new_file)
-        else:
-            print(f"Copying {file} to {new_file}")
-            shutil.copy(file, new_file)
+dir_path_static = "./static"
+dir_path_public = "./docs"
+dir_path_content = "./content"
+template_path = "./template.html"
+default_basepath = "/"
 
-def extract_title(htmlnode):
-    elements = htmlnode.children
-    if not elements or len(elements) < 1:
-        raise Exception("Improper markdown")
-    first_element = elements[0]
-    if(first_element.tag != "h1" or not first_element.children or len(first_element.children) == 0):
-        raise Exception("Improper markdown")
-    if first_element.children[0].value is None:
-        raise Exception("Improper markdown")
-    return first_element.children[0].value    
-
-def generate_page(from_path, template_path, dest_path, basepath):
-    print(f"Generating page from {from_path} to {dest_path} using {template_path}")
-    markdown = from_path.read_text()
-    template = template_path.read_text()
-    html = markdown_to_html_node(markdown)
-    title = extract_title(html)
-    #print(title)
-    #print(html.to_html())
-    template = (
-        template.replace("{{ Title }}", title)
-        .replace("{{ Content }}", html.to_html())
-        .replace('href="/', f'href="{basepath}')
-        .replace('src="/', f'src="{basepath}')
-    )
-
-    if not dest_path.parent.exists():
-        dest_path.parent.mkdir()
-    #print(f"dest_path is: {dest_path}")
-    dest_path.write_text(template)
-
-def generate_pages_recursive(dir_path_content, template_path, dest_dir_path, basepath):
-    if not dest_dir_path.exists():
-        dest_dir_path.mkdir()
-    for file in dir_path_content.iterdir():
-        new_file = dest_dir_path / file.name
-        if file.is_dir():
-            generate_pages_recursive(file, template_path, new_file, basepath)
-        else:
-            if file.suffix.lower() == ".md":
-                generate_page(file, template_path, new_file.with_suffix(".html"), basepath)
-            else:
-                print(f"Ignoring file: {f}")
 
 def main():
-    if len(sys.argv) == 2:
+    basepath = default_basepath
+    if len(sys.argv) > 1:
         basepath = sys.argv[1]
-    else:
-        basepath = "/"
 
-    project_root = Path(__file__).parent.parent
-    destination_path = project_root / "docs"
-    source_path = project_root / "static"
-    
-    #remove dir before copying
-    if destination_path.exists():
-        #delete_files_in_dir(destination_path)
-        shutil.rmtree(destination_path)
+    print("Deleting public directory...")
+    if os.path.exists(dir_path_public):
+        shutil.rmtree(dir_path_public)
 
-    copy_dir_recursive(source_path, destination_path)
-    
-    from_path = project_root / "content"
-    template_path = project_root / "template.html"
+    print("Copying static files to public directory...")
+    copy_files_recursive(dir_path_static, dir_path_public)
 
-    generate_pages_recursive(from_path, template_path, destination_path, basepath)
+    print("Generating content...")
+    generate_pages_recursive(dir_path_content, template_path, dir_path_public, basepath)
+
+
+main()
     
 
 
