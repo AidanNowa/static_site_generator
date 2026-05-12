@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fantasy Football Analytics TUI</title>
+    <link rel="stylesheet" href="/index.css"/>
+  </head>
+
+  <body>
+    <article><div><h1>Fantasy Football Analytics TUI</h1><p>A terminal-based analytics dashboard for Yahoo Fantasy Football, built to give dynasty league managers deeper insight into weekly player performance than the default Yahoo interface provides.</p><h2>The Problem</h2><p>In a dynasty league — where you keep your entire roster from year to year — decisions are more complex than a standard redraft. You need to evaluate players not just for this week, but for future seasons. The default Yahoo dashboard doesn't surface the data in a way that makes those decisions easy.</p><h2>What It Does</h2><ul><li>Pulls weekly player performance and projection data from the Yahoo Fantasy API</li><li>Renders an interactive terminal dashboard using the Textual framework</li><li>Lets you filter by position group (QB, RB, WR, TE, K) to compare matchups</li><li>Displays actual points scored vs. projection margins in real-time bar charts</li><li>Supports both long and wide pandas DataFrame formats for custom data exploration</li></ul><h2>Tech Stack</h2><ul><li><b>Python</b> — core logic and data transformation</li><li><b>Textual</b> — terminal UI framework</li><li><b>plotext</b> — in-terminal charting</li><li><b>pandas</b> — data wrangling and reshaping</li></ul><h2>What I Learned</h2><p>This was my first end-to-end personal project. I worked through connecting to an external API, structuring data transformations cleanly with pandas, and building a responsive interactive UI in the terminal — a constraint that forced creative solutions for layout and event handling.</p><p><a href="https://github.com/AidanNowa/fantasy_football_analytics">View on GitHub</a></p><p><a href="/">Back to Home</a></p></div></article>
+  </body>
+</html>

@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Static Site Generator</title>
+    <link rel="stylesheet" href="/index.css"/>
+  </head>
+
+  <body>
+    <article><div><h1>Static Site Generator</h1><p>A custom static site generator written in Python — and the engine powering this website.</p><h2>What It Does</h2><p>Takes a directory of Markdown files and a single HTML template and produces a complete static site. It handles:</p><ul><li>Full Markdown parsing: headings, bold, italic, inline code, code blocks, blockquotes, ordered and unordered lists, links, and images</li><li>Recursive directory traversal — drop a Markdown file anywhere in the content tree and it generates the corresponding HTML page</li><li>Static asset copying (CSS, images) from a source directory to the output</li><li>Configurable base path for deployment to subdirectory URLs (e.g. GitHub Pages)</li></ul><h2>How It Works</h2><p>The parser converts Markdown text into a tree of custom <code>HTMLNode</code> objects (<code>LeafNode</code> for inline elements, <code>ParentNode</code> for block-level containers), then walks the tree calling <code>.to_html()</code> to produce the final markup. Each Markdown block type — paragraph, heading, code, quote, list — has its own conversion function.</p><h2>Tech Stack</h2><ul><li><b>Python</b> — everything, no dependencies</li><li>Shell scripts for building and running a local dev server</li></ul><h2>What I Learned</h2><p>This project was part of the Boot.dev curriculum and gave me a solid grounding in recursive tree structures, parsing strategies, and the value of a thorough test suite. I also tracked down and fixed several bugs in the process — including a regex that incorrectly matched image syntax as links, and void HTML tags (<code>img</code>, <code>br</code>) being rendered with closing tags.</p><p><a href="https://github.com/AidanNowa/static_site_generator">View on GitHub</a></p><p><a href="/">Back to Home</a></p></div></article>
+  </body>
+</html>
