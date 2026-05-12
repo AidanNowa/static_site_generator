@@ -1,9 +1,9 @@
-# Contact the Author
+# Contact
 
-[< Back Home](/)
+I'm always open to talking about data engineering, analytics, ML, or interesting projects. The best ways to reach me:
 
-Give me a call anytime to chat about Tolkien!
+- **Email:** [aidannowakowski@gmail.com](mailto:aidannowakowski@gmail.com)
+- **LinkedIn:** [linkedin.com/in/aidan-nowakowski](https://www.linkedin.com/in/aidan-nowakowski/)
+- **GitHub:** [github.com/AidanNowa](https://github.com/AidanNowa)
 
-`555-555-5555`
-
-**"Váya márië."**
+[Back to Home](/)
