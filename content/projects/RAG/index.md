@@ -10,7 +10,7 @@ RAG CLI is a Python tool that lets you point it at a set of documents and then q
 
 RAG is one of the most practical techniques in applied ML right now — it's how most production LLM-powered tools actually work. Building one from scratch is the fastest way to understand what's happening under the hood: chunking strategies, embedding models, vector similarity search, prompt construction, and context window management.
 
-## Stack (so far)
+## Stack (planned)
 
 - **Python** — CLI interface and pipeline orchestration
 - Vector embeddings and similarity search
@@ -18,7 +18,7 @@ RAG is one of the most practical techniques in applied ML right now — it's how
 
 ## Status
 
-This is actively in development. The core retrieval pipeline is in place and the CLI interface is being built out. Follow the repo for updates.
+This is actively in development. The keyword and BM25 search are in place and the CLI interface is being built out. Follow the repo for updates.
 
 [View on GitHub](https://github.com/AidanNowa/RAG)
 
