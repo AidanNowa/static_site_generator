@@ -15,6 +15,8 @@ class BlockType(Enum):
 
 
 def markdown_to_blocks(markdown):
+    #strip trailing whitespace from each line so blank lines with spaces split correctly
+    markdown = "\n".join(line.rstrip() for line in markdown.split("\n"))
     blocks = markdown.split("\n\n")
     filtered_blocks = []
     for block in blocks:
