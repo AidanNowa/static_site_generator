@@ -40,5 +40,4 @@ Optimized non-volatile memory access algorithms in C++ using the gem5 simulator.
  
 [Get in touch](/contact)
  
-[GitHub](https://github.com/AidanNowa) | [LinkedIn](https://www.linkedin.com/in/aidan-nowakowski/)
- 
+[GitHub](https://github.com/AidanNowa) | [LinkedIn](https://www.linkedin.com/in/aidan-nowakowski/) 
