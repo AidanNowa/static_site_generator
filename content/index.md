@@ -13,10 +13,10 @@ I hold a Master's in Electrical and Computer Engineering from Boston University 
 - **Concepts:** ELT pipeline design, medallion architecture, RAG, ROS, data validation
 ## Projects
  
-- [Fantasy Football Analytics TUI](/projects/fantasy-football) — Terminal dashboard for Yahoo fantasy data with interactive charts
+- [Fantasy Football Analytics TUI](/projects/fantasy_football) — Terminal dashboard for Yahoo fantasy data with interactive charts
 - [TAGBOT — Autonomous Tag-Playing Robot](/projects/tagbot) — ROS-based robot that chases players using computer vision and LiDAR
-- [RAG CLI (WIP)](/projects/rag) — Command-line retrieval-augmented generation tool built in Python
-- [Static Site Generator](/projects/static-site-generator) — Custom Markdown-to-HTML site generator (you're looking at it)
+- [RAG CLI (WIP)](/projects/RAG) — Command-line retrieval-augmented generation tool built in Python
+- [Static Site Generator](/projects/static_site_generator) — Custom Markdown-to-HTML site generator (you're looking at it)
 ## Experience
  
 **Solutions Consultant** — Axis Group _(Feb 2026 – Present)_
