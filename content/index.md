@@ -1,6 +1,6 @@
 # Aidan Nowakowski
  
-**Data Engineer | Analytics Engineer | New York, NY**
+**Data Engineer | Analytics Engineer | Boston, MA**
  
 I build data pipelines, analytics systems, and tools that turn raw data into reliable decisions. Currently working as a Solutions Consultant at Axis Group, driving end-to-end delivery of analytics solutions spanning ELT pipeline development, dimensional modeling, and BI reporting.
  
